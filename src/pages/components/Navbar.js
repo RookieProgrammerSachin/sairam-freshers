@@ -1,9 +1,11 @@
 import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useState } from "react";
 
 const Navbar = ({ name }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   return (
     <nav className="nav grid grid-rows-3 gap-4 md:gap-8 px-12 py-4 items-center w-full border justify-center border-silver z-10 md:grid-cols-[0.7fr_1fr_0.5fr] md:grid-rows-none">
       <Image
@@ -19,6 +21,7 @@ const Navbar = ({ name }) => {
       </h1>
 
       <Menu as={'div'} className="relative inline-block w-fit mx-auto">
+        { ({ open }) => open? setIsMenuOpen(true):setIsMenuOpen(false)}
         <Menu.Button className='flex items-center gap-4 border border-silver px-4 py-2 rounded-full'>
           <Image
             src="/user-128-32.png"
@@ -33,7 +36,7 @@ const Navbar = ({ name }) => {
             width={50}
             height={50}
             alt="User Menu Icon"
-            className="w-[1rem]"
+            className={`w-[1rem] transition-transform ${isMenuOpen && `rotate-180`}`}
           />
         </Menu.Button>
         <Transition  className="absolute shadow-lg w-full py-6 px-12 top-18 bg-white border rounded-md border-silver"
@@ -44,7 +47,7 @@ const Navbar = ({ name }) => {
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
         >
-          <Menu.Items>
+          <Menu.Items static>
             <Menu.Item as="div"><Link href='/profile'>Profile</Link></Menu.Item>
             <Menu.Item as="div"><Link href='/'>Sign Out</Link> </Menu.Item>
           </Menu.Items>
