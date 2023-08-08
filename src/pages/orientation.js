@@ -1,19 +1,15 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import PageMenu from '../components/PageMenu'
 import PageContent from '../components/PageContent'
-import BodyContainer from '../components/BodyContainer'
+import MainLayout from '@/components/MainLayout'
 
 export default function Portal() {
   return (
-    <>
-        <Navbar />
-        <BodyContainer>
-        <PageMenu currentPage={1} />
-            <PageContent>
-                Orientation
-            </PageContent>
-        </BodyContainer>
-    </>
+    <MainLayout>
+      <PageMenu currentPage={1} />
+      <PageContent>
+        Orientation
+      </PageContent>
+    </MainLayout>
   )
 }
